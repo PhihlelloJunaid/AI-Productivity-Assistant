@@ -3,7 +3,7 @@ import KasiApp from "@/components/kasi/KasiApp";
 
 const title = "KasiKitchen AI — Township Kitchen Operations Demo";
 const description =
-  "Interactive prototype of KasiKitchen AI: orders, menu board, AI chef, inventory, customers, promos and delivery for a township kitchen.";
+  "Interactive prototype of KasiKitchen AI: orders, menu board, Chef S'bongi co-pilot, inventory, customers, promos and delivery for a township kitchen.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
