@@ -716,7 +716,7 @@ const SBONGI_EXAMPLES = [
 
 const SBONGI_SKILLS = [
   {
-    emoji: "🍛",
+    emoji: "🔥",
     title: "Specials & menu ideas",
     desc: "Payday specials, seasonal dishes and combos matched to what your customers already love.",
   },
@@ -762,8 +762,8 @@ function AIChef() {
       <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary via-card to-card p-6 md:p-8 kasi-grain">
         <div className="kasi-stripe absolute inset-x-0 top-0 h-1.5" />
         <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
-          <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-4xl ring-1 ring-primary/30">
-            👩🏾‍🍳
+          <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-primary/15 ring-1 ring-primary/30">
+            <ChefHat className="size-8 text-primary" />
           </div>
           <div>
             <h3 className="text-3xl text-primary md:text-4xl">Sawubona, my chef! I'm S'bongi.</h3>
