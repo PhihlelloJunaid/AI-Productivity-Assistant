@@ -709,7 +709,7 @@ const IDEAS = [
 function AIChef() {
   const [prompt, setPrompt] = useState("Give me a payday special using what's in stock");
   const [loading, setLoading] = useState(false);
-  const [idea, setIdea] = useState<(typeof IDEAS)[number] | null>(IDEAS[0]);
+  const [idea, setIdea] = useState<(typeof IDEAS)[number] | null>(IDEAS[0]!);
 
   const generate = () => {
     if (!prompt.trim()) {
