@@ -310,4 +310,4 @@ export const salesByDay = [
   { day: "Sun", sales: 5100, orders: 72 },
 ];
 
-export const rand = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
+export const rand = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)] as T;

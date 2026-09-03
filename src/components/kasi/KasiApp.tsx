@@ -175,7 +175,7 @@ export default function KasiApp() {
     setOrders((prev) =>
       prev.map((o) => {
         if (o.id !== id) return o;
-        const next = ORDER_FLOW[Math.min(ORDER_FLOW.indexOf(o.status) + 1, ORDER_FLOW.length - 1)];
+        const next = ORDER_FLOW[Math.min(ORDER_FLOW.indexOf(o.status) + 1, ORDER_FLOW.length - 1)]!;
         if (next !== o.status) toast.success(`${o.id} moved to ${next}`);
         return { ...o, status: next };
       }),
@@ -428,7 +428,7 @@ function Dashboard({
                 <span className="text-xl">{m.emoji}</span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold">{m.name}</p>
-                  <Progress value={(m.sold / top[0].sold) * 100} className="mt-1 h-1.5" />
+                  <Progress value={(m.sold / (top[0]?.sold || 1)) * 100} className="mt-1 h-1.5" />
                 </div>
                 <span className="text-sm text-muted-foreground">{m.sold}</span>
               </li>
@@ -819,7 +819,7 @@ function Inventory({
           <p className="flex-1 text-sm">
             <span className="font-semibold">{low.length} items below par.</span>{" "}
             <span className="text-muted-foreground">
-              AI suggests ordering from {low[0].supplier} before the 3pm cut-off.
+              AI suggests ordering from {low[0]?.supplier} before the 3pm cut-off.
             </span>
           </p>
           <Button
@@ -990,7 +990,10 @@ function Promotions({
           <Button
             variant="secondary"
             onClick={() => {
-              if (!draft.trim()) return toast.error("Generate or write some copy first.");
+              if (!draft.trim()) {
+                toast.error("Generate or write some copy first.");
+                return;
+              }
               setPromos((prev) => [
                 {
                   id: `p${Date.now()}`,
