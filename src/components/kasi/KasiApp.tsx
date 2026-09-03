@@ -833,7 +833,7 @@ function AIChef() {
           {loading && (
             <div className="space-y-3">
               <p className="text-sm italic text-muted-foreground">
-                "Eish, give me a second, my chef… something lekker is coming." 👩🏾‍🍳
+                "Eish, give me a second, my chef… something lekker is coming." 🔥
               </p>
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="h-4 animate-pulse rounded bg-muted" />
