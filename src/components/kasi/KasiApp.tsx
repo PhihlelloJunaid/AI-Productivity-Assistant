@@ -59,7 +59,7 @@ const SECTIONS = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "orders", label: "Orders", icon: Receipt },
   { id: "menu", label: "Menu", icon: UtensilsCrossed },
-  { id: "aichef", label: "AI Chef", icon: ChefHat },
+  { id: "aichef", label: "Chef S'bongi", icon: ChefHat },
   { id: "inventory", label: "Inventory", icon: Package },
   { id: "customers", label: "Customers", icon: Users },
   { id: "promotions", label: "Promotions", icon: Megaphone },
@@ -668,7 +668,7 @@ function MenuBoard({
   );
 }
 
-/* ---------------- AI Chef ---------------- */
+/* ---------------- Chef S'bongi ---------------- */
 
 const IDEAS = [
   {
