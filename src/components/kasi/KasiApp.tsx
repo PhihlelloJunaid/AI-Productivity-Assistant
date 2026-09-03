@@ -59,7 +59,7 @@ const SECTIONS = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "orders", label: "Orders", icon: Receipt },
   { id: "menu", label: "Menu", icon: UtensilsCrossed },
-  { id: "aichef", label: "AI Chef", icon: ChefHat },
+  { id: "aichef", label: "Chef S'bongi", icon: ChefHat },
   { id: "inventory", label: "Inventory", icon: Package },
   { id: "customers", label: "Customers", icon: Users },
   { id: "promotions", label: "Promotions", icon: Megaphone },
@@ -668,7 +668,7 @@ function MenuBoard({
   );
 }
 
-/* ---------------- AI Chef ---------------- */
+/* ---------------- Chef S'bongi ---------------- */
 
 const IDEAS = [
   {
@@ -706,14 +706,45 @@ const IDEAS = [
   },
 ];
 
+const SBONGI_EXAMPLES = [
+  "S'bongi, it's month-end — what special will pull a crowd?",
+  "Help me use up my bread stock before Friday",
+  "Give me a vegetarian kota under R60",
+  "What can I plate for under R40 on a rainy Tuesday?",
+  "Sunday after-church rush — what should I push?",
+];
+
+const SBONGI_SKILLS = [
+  {
+    emoji: "🔥",
+    title: "Specials & menu ideas",
+    desc: "Payday specials, seasonal dishes and combos matched to what your customers already love.",
+  },
+  {
+    emoji: "📦",
+    title: "Stock rescue",
+    desc: "S'bongi checks what's sitting in your fridges and turns it into a dish before it goes to waste.",
+  },
+  {
+    emoji: "💰",
+    title: "Pricing & margins",
+    desc: "Every suggestion comes with a street-smart price and an estimated margin, kasi economics included.",
+  },
+  {
+    emoji: "🌦️",
+    title: "Day & weather sense",
+    desc: "Rainy Tuesday? Sunday after church? S'bongi reads the day and suggests what will move.",
+  },
+];
+
 function AIChef() {
-  const [prompt, setPrompt] = useState("Give me a payday special using what's in stock");
+  const [prompt, setPrompt] = useState("S'bongi, it's month-end — what special will pull a crowd?");
   const [loading, setLoading] = useState(false);
   const [idea, setIdea] = useState<(typeof IDEAS)[number] | null>(IDEAS[0]!);
 
   const generate = () => {
     if (!prompt.trim()) {
-      toast.error("Tell the AI chef what you're craving.");
+      toast.error("Tell S'bongi what you're craving, my chef.");
       return;
     }
     setLoading(true);
@@ -721,76 +752,129 @@ function AIChef() {
     setTimeout(() => {
       setIdea(rand(IDEAS));
       setLoading(false);
-      toast.success("Fresh recipe cooked up");
+      toast.success("S'bongi cooked up something lekker");
     }, 1100);
   };
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_1.2fr]">
-      <Panel title="Ask the AI chef" kicker="Kasi intelligence">
-        <Textarea
-          rows={4}
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="e.g. cheap winter dish for a rainy Tuesday"
-        />
-        <div className="mt-3 flex flex-wrap gap-2">
-          {["Payday special", "Use up bread stock", "Vegetarian kota", "Under R40 plate"].map(
-            (chip) => (
-              <button
-                key={chip}
-                onClick={() => setPrompt(chip)}
-                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-primary hover:text-primary"
-              >
-                {chip}
-              </button>
-            ),
-          )}
+    <div className="space-y-6">
+      {/* Welcome banner */}
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary via-card to-card p-6 md:p-8 kasi-grain">
+        <div className="kasi-stripe absolute inset-x-0 top-0 h-1.5" />
+        <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
+          <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-primary/15 ring-1 ring-primary/30">
+            <ChefHat className="size-8 text-primary" />
+          </div>
+          <div>
+            <h3 className="text-3xl text-primary md:text-4xl">Sawubona, my chef! I'm S'bongi.</h3>
+            <p className="mt-1 max-w-2xl text-sm text-muted-foreground md:text-base">
+              Your kasi kitchen co-pilot. I know your menu, your stock, and what your neighbours are
+              craving. Ask me anything — a payday special, a way to save that bread stock, or a new
+              dish to make the whole street talk. Sharp sharp, let's cook.
+            </p>
+          </div>
         </div>
-        <Button className="mt-4 w-full" onClick={generate} disabled={loading}>
-          <ChefHat className="size-4" /> {loading ? "Cooking ideas…" : "Generate recipe"}
-        </Button>
-        <p className="mt-3 text-xs text-muted-foreground">
-          Prototype only — responses are pre-written demo content.
-        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {SBONGI_EXAMPLES.map((chip) => (
+            <button
+              key={chip}
+              onClick={() => setPrompt(chip)}
+              className="rounded-full border border-border bg-card/60 px-3 py-1.5 text-xs text-muted-foreground transition hover:border-primary hover:text-primary"
+            >
+              {chip}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* What S'bongi can help with */}
+      <Panel title="What Chef S'bongi can help with" kicker="Your co-pilot">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {SBONGI_SKILLS.map((s) => (
+            <div key={s.title} className="rounded-xl border border-border bg-card/60 p-4">
+              <div className="text-2xl">{s.emoji}</div>
+              <h4 className="mt-2 text-lg">{s.title}</h4>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.desc}</p>
+            </div>
+          ))}
+        </div>
       </Panel>
 
-      <Panel title="Suggested dish" kicker="AI output">
-        {loading && (
-          <div className="space-y-3">
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="h-4 animate-pulse rounded bg-muted" />
-            ))}
+      <div className="grid gap-6 xl:grid-cols-[1fr_1.2fr]">
+        <Panel title="Chat to S'bongi" kicker="Kasi intelligence">
+          <Textarea
+            rows={4}
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="e.g. S'bongi, cheap winter dish for a rainy Tuesday"
+          />
+          <div className="mt-3 flex flex-wrap gap-2">
+            {["Payday special", "Use up bread stock", "Vegetarian kota", "Under R40 plate"].map(
+              (chip) => (
+                <button
+                  key={chip}
+                  onClick={() => setPrompt(chip)}
+                  className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-primary hover:text-primary"
+                >
+                  {chip}
+                </button>
+              ),
+            )}
           </div>
-        )}
-        {!loading && idea && (
-          <div className="space-y-4">
-            <div>
-              <h4 className="text-3xl text-primary">{idea.title}</h4>
-              <p className="mt-1 text-sm text-muted-foreground">{idea.why}</p>
-            </div>
-            <div className="flex gap-3">
-              <Badge className="bg-primary text-primary-foreground">
-                Suggested price {rands(idea.price)}
-              </Badge>
-              <Badge variant="outline" className="border-success/40 bg-success/10 text-success">
-                Margin {idea.margin}
-              </Badge>
-            </div>
-            <ol className="space-y-2 text-sm">
-              {idea.steps.map((s, i) => (
-                <li key={s} className="flex gap-3">
-                  <span className="font-display text-xl text-accent">{i + 1}</span>
-                  <span className="text-muted-foreground">{s}</span>
-                </li>
+          <Button className="mt-4 w-full" onClick={generate} disabled={loading}>
+            <ChefHat className="size-4" /> {loading ? "S'bongi is cooking…" : "Ask Chef S'bongi"}
+          </Button>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Prototype only — S'bongi's answers are pre-written demo content.
+          </p>
+        </Panel>
+
+        <Panel title="S'bongi's suggestion" kicker="Fresh from the coals">
+          {loading && (
+            <div className="space-y-3">
+              <p className="text-sm italic text-muted-foreground">
+                "Eish, give me a second, my chef… something lekker is coming." 🔥
+              </p>
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="h-4 animate-pulse rounded bg-muted" />
               ))}
-            </ol>
-            <Button variant="secondary" onClick={() => toast.success("Saved to menu drafts")}>
-              Save to menu drafts
-            </Button>
-          </div>
-        )}
-      </Panel>
+            </div>
+          )}
+          {!loading && idea && (
+            <div className="space-y-4">
+              <p className="text-sm italic text-muted-foreground">
+                "Okay my chef, listen — I've got just the thing for you:"
+              </p>
+              <div>
+                <h4 className="text-3xl text-primary">{idea.title}</h4>
+                <p className="mt-1 text-sm text-muted-foreground">Why it works: {idea.why}</p>
+              </div>
+              <div className="flex gap-3">
+                <Badge className="bg-primary text-primary-foreground">
+                  Suggested price {rands(idea.price)}
+                </Badge>
+                <Badge variant="outline" className="border-success/40 bg-success/10 text-success">
+                  Margin {idea.margin}
+                </Badge>
+              </div>
+              <ol className="space-y-2 text-sm">
+                {idea.steps.map((s, i) => (
+                  <li key={s} className="flex gap-3">
+                    <span className="font-display text-xl text-accent">{i + 1}</span>
+                    <span className="text-muted-foreground">{s}</span>
+                  </li>
+                ))}
+              </ol>
+              <Button
+                variant="secondary"
+                onClick={() => toast.success("S'bongi saved it to your menu drafts")}
+              >
+                Save to menu drafts
+              </Button>
+            </div>
+          )}
+        </Panel>
+      </div>
     </div>
   );
 }
