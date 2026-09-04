@@ -69,7 +69,9 @@ const SECTIONS = [
 
 type SectionId = (typeof SECTIONS)[number]["id"];
 
-const rands = (n: number) => `R${n.toLocaleString("en-ZA")}`;
+// Deterministic formatting (toLocaleString differs between SSR and client).
+const group = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const rands = (n: number) => `R${group(n)}`;
 
 function Panel({
   title,
@@ -1138,7 +1140,7 @@ function Promotions({
               <p className="mt-2 text-sm text-muted-foreground">{p.copy}</p>
               <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
                 <span>
-                  {p.channel} · {p.reach.toLocaleString("en-ZA")} reached
+                  {p.channel} · {group(p.reach)} reached
                 </span>
                 <Switch
                   checked={p.live}
