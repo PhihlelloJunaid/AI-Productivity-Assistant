@@ -311,7 +311,8 @@ export default function KasiApp() {
 
         {/* Main */}
         <main className="min-w-0 flex-1">
-          <header className="sticky top-0 z-30 flex flex-wrap items-center gap-3 border-b border-border bg-background/90 px-4 py-4 backdrop-blur md:px-8">
+          <header className="sticky top-0 z-30 flex flex-wrap items-center gap-3 border-b border-border bg-background/90 px-4 py-4 pb-5 backdrop-blur md:px-8">
+            <div className="shweshwe pointer-events-none absolute inset-x-0 bottom-0 h-[3px] opacity-70" />
             <button
               onClick={() => setNavOpen(true)}
               className="rounded-lg border border-border p-2 lg:hidden"
