@@ -613,7 +613,7 @@ function MenuBoard({
                       src={m.img}
                       alt={m.name}
                       loading="lazy"
-                      className="h-full w-full object-cover"
+                      className={cn("h-full w-full object-cover", !m.available && "grayscale")}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                     <span className="absolute bottom-2 left-3 rounded-md bg-background/80 px-2 py-0.5 text-2xl">
