@@ -69,7 +69,9 @@ const SECTIONS = [
 
 type SectionId = (typeof SECTIONS)[number]["id"];
 
-const rands = (n: number) => `R${n.toLocaleString("en-ZA")}`;
+// Deterministic formatting (toLocaleString differs between SSR and client).
+const group = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const rands = (n: number) => `R${group(n)}`;
 
 function Panel({
   title,
@@ -311,7 +313,8 @@ export default function KasiApp() {
 
         {/* Main */}
         <main className="min-w-0 flex-1">
-          <header className="sticky top-0 z-30 flex flex-wrap items-center gap-3 border-b border-border bg-background/90 px-4 py-4 backdrop-blur md:px-8">
+          <header className="sticky top-0 z-30 flex flex-wrap items-center gap-3 border-b border-border bg-background/90 px-4 py-4 pb-5 backdrop-blur md:px-8">
+            <div className="shweshwe pointer-events-none absolute inset-x-0 bottom-0 h-[3px] opacity-70" />
             <button
               onClick={() => setNavOpen(true)}
               className="rounded-lg border border-border p-2 lg:hidden"
@@ -562,6 +565,7 @@ function MenuBoard({
         category: "Braai & Meat",
         available: true,
         emoji: "🍲",
+        img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=60",
         sold: 0,
       },
       ...prev,
@@ -602,12 +606,28 @@ function MenuBoard({
                 <article
                   key={m.id}
                   className={cn(
-                    "rounded-lg border border-border bg-background/40 p-4",
+                    "overflow-hidden rounded-lg border border-border bg-background/40",
                     !m.available && "opacity-55",
                   )}
                 >
+                  <div className="relative h-28">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      loading="lazy"
+                      className={cn("h-full w-full object-cover", !m.available && "grayscale")}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <span className="absolute bottom-2 left-3 rounded-md bg-background/80 px-2 py-0.5 text-2xl">
+                      {m.emoji}
+                    </span>
+                    <span className="absolute right-3 bottom-2 rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">
+                      {rands(m.price)}
+                    </span>
+                    <div className="shweshwe-band absolute inset-x-0 top-0 h-1.5 opacity-80" />
+                  </div>
+                  <div className="p-4">
                   <div className="flex items-start gap-3">
-                    <span className="text-3xl">{m.emoji}</span>
                     <div className="min-w-0 flex-1">
                       <p className="font-semibold">{m.name}</p>
                       <p className="text-xs text-muted-foreground">{m.desc}</p>
@@ -657,6 +677,7 @@ function MenuBoard({
                         toast(v ? `${m.name} is back on` : `${m.name} marked sold out`);
                       }}
                     />
+                  </div>
                   </div>
                 </article>
               ))}
@@ -1119,7 +1140,7 @@ function Promotions({
               <p className="mt-2 text-sm text-muted-foreground">{p.copy}</p>
               <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
                 <span>
-                  {p.channel} · {p.reach.toLocaleString("en-ZA")} reached
+                  {p.channel} · {group(p.reach)} reached
                 </span>
                 <Switch
                   checked={p.live}
