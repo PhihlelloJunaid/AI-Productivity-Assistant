@@ -603,12 +603,28 @@ function MenuBoard({
                 <article
                   key={m.id}
                   className={cn(
-                    "rounded-lg border border-border bg-background/40 p-4",
+                    "overflow-hidden rounded-lg border border-border bg-background/40",
                     !m.available && "opacity-55",
                   )}
                 >
+                  <div className="relative h-28">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <span className="absolute bottom-2 left-3 rounded-md bg-background/80 px-2 py-0.5 text-2xl">
+                      {m.emoji}
+                    </span>
+                    <span className="absolute right-3 bottom-2 rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">
+                      {rands(m.price)}
+                    </span>
+                    <div className="shweshwe-band absolute inset-x-0 top-0 h-1.5 opacity-80" />
+                  </div>
+                  <div className="p-4">
                   <div className="flex items-start gap-3">
-                    <span className="text-3xl">{m.emoji}</span>
                     <div className="min-w-0 flex-1">
                       <p className="font-semibold">{m.name}</p>
                       <p className="text-xs text-muted-foreground">{m.desc}</p>
