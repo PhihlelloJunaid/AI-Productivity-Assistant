@@ -562,6 +562,7 @@ function MenuBoard({
         category: "Braai & Meat",
         available: true,
         emoji: "🍲",
+        img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=60",
         sold: 0,
       },
       ...prev,

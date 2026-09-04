@@ -134,6 +134,40 @@
   }
 }
 
+/*
+ * Shweshwe-inspired geometric print: small repeating diamond grid with
+ * dotted centres, like the indigo cotton fabric. Rendered in primary
+ * colour at low opacity so it warms surfaces without shouting.
+ */
+@utility shweshwe {
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--primary) 1px, transparent 1.6px),
+    repeating-linear-gradient(
+      45deg,
+      var(--primary) 0 1.5px,
+      transparent 1.5px 11px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      var(--primary) 0 1.5px,
+      transparent 1.5px 11px
+    );
+  background-size:
+    22px 22px,
+    22px 22px,
+    22px 22px;
+}
+
+@utility shweshwe-band {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--primary) 0 10px,
+    var(--accent) 10px 20px,
+    var(--success) 20px 30px,
+    var(--background) 30px 32px
+  );
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
