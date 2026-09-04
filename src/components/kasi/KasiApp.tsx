@@ -675,6 +675,7 @@ function MenuBoard({
                       }}
                     />
                   </div>
+                  </div>
                 </article>
               ))}
             </div>
