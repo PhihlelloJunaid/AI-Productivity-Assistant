@@ -20,6 +20,7 @@ export type MenuItem = {
   category: "Braai & Meat" | "Pap & Sides" | "Kotas & Rolls" | "Drinks";
   available: boolean;
   emoji: string;
+  img: string;
   sold: number;
 };
 
@@ -134,6 +135,7 @@ export const initialMenu: MenuItem[] = [
     category: "Kotas & Rolls",
     available: true,
     emoji: "🥪",
+    img: "https://images.unsplash.com/photo-1550507992-eb63ffee0847?auto=format&fit=crop&w=600&q=60",
     sold: 128,
   },
   {
@@ -144,6 +146,7 @@ export const initialMenu: MenuItem[] = [
     category: "Braai & Meat",
     available: true,
     emoji: "🔥",
+    img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=60",
     sold: 96,
   },
   {
@@ -154,6 +157,7 @@ export const initialMenu: MenuItem[] = [
     category: "Braai & Meat",
     available: true,
     emoji: "🍗",
+    img: "https://images.unsplash.com/photo-1594221708779-94832f4320d1?auto=format&fit=crop&w=600&q=60",
     sold: 214,
   },
   {
@@ -164,6 +168,7 @@ export const initialMenu: MenuItem[] = [
     category: "Pap & Sides",
     available: true,
     emoji: "🌽",
+    img: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=60",
     sold: 173,
   },
   {
@@ -174,6 +179,7 @@ export const initialMenu: MenuItem[] = [
     category: "Kotas & Rolls",
     available: false,
     emoji: "🫓",
+    img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=60",
     sold: 61,
   },
   {
@@ -184,6 +190,7 @@ export const initialMenu: MenuItem[] = [
     category: "Pap & Sides",
     available: true,
     emoji: "🥬",
+    img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=60",
     sold: 44,
   },
   {
@@ -194,6 +201,7 @@ export const initialMenu: MenuItem[] = [
     category: "Braai & Meat",
     available: true,
     emoji: "🍖",
+    img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=60",
     sold: 37,
   },
   {
@@ -204,6 +212,7 @@ export const initialMenu: MenuItem[] = [
     category: "Drinks",
     available: true,
     emoji: "🥤",
+    img: "https://images.unsplash.com/photo-1437418747212-8d9709afab22?auto=format&fit=crop&w=600&q=60",
     sold: 302,
   },
 ];
